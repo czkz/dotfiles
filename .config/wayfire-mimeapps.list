@@ -1,0 +1,6 @@
+[Default Applications]
+image/gif=mpv.desktop
+image/jpeg=mpv.desktop
+image/png=mpv.desktop
+inode/directory=lf.desktop
+text/html=browser.desktop

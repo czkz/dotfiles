@@ -1,0 +1,6 @@
+$include /etc/inputrc
+set colored-completion-prefix on
+set colored-stats on
+set completion-ignore-case on
+set match-hidden-files off
+set show-all-if-unmodified on

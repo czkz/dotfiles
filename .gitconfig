@@ -1,0 +1,23 @@
+[user]
+	email = deekovalev@gmail.com
+	name = Dmitry
+[pull]
+	ff = only
+[init]
+	defaultBranch = master
+[format]
+	pretty = format:%Cred%h %Cgreen(%cr)%<|(26)%Creset %<(30,trunc)%s %C(yellow)%d%Creset
+[core]
+	excludesFile = ~/.gitignore
+
+
+[core]
+    pager = delta
+[interactive]
+    diffFilter = delta --color-only
+[delta]
+    navigate = true
+[merge]
+    conflictstyle = diff3
+[diff]
+    colorMoved = default
