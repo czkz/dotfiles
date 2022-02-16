@@ -56,6 +56,7 @@ __git_complete config __git_main
 # Cloning:
 # git clone --bare <git-repo-url> $HOME/.dotfiles
 # alias config='git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
+# config config status.showUntrackedFiles no
 # cd && config checkout
 
 # Colors ───────────────────────────────────────────────────────────────────────
