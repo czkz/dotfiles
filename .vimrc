@@ -129,6 +129,7 @@ set wildmode=list:longest,full " Autocompletion menu style
 set completeopt=menuone,popup  " Prettier code autocompletion
 set shortmess-=S               " Show search match index in statusline
 set scrolloff=5                " Always keep 5 lines above/below cursor
+set nowrap                     " Do not wrap lines
 
 " Fixes freezing when typing <Esc>O in insert mode
 set timeout timeoutlen=3000 ttimeoutlen=100
