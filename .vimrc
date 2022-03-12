@@ -1,5 +1,8 @@
+" Using Shift+K on plugin name (or anything else) will likely show what it does
+
 " curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
 call plug#begin()
+" Generic
 Plug 'preservim/nerdcommenter'
 Plug 'tpope/vim-surround'
 Plug 'raimondi/delimitmate'
@@ -8,21 +11,23 @@ Plug 'mbbill/undotree'
 Plug 'vim-airline/vim-airline'
 Plug 'junegunn/vim-easy-align'
 Plug 'jasonccox/vim-wayland-clipboard'
+" LSP client
+Plug 'dense-analysis/ale'
+" HTML
+Plug 'AndrewRadev/tagalong.vim'
+Plug 'mattn/emmet-vim'
 " Language support
-" Plug 'AndrewRadev/tagalong.vim'
-" Plug 'mattn/emmet-vim'
-" Plug 'ycm-core/YouCompleteMe'
-" Plug 'igankevich/mesonic'
-" Plug 'tikhomirov/vim-glsl'
-" Plug 'arrufat/vala.vim'
-" Plug 'ollykel/v-vim'
-" Plug 'ziglang/zig.vim'
+Plug 'igankevich/mesonic'
+Plug 'tikhomirov/vim-glsl'
+Plug 'arrufat/vala.vim'
+Plug 'ollykel/v-vim'
+Plug 'ziglang/zig.vim'
 call plug#end()
 
 
 
 " Ctrl+L disables search highlighting
-nnoremap <c-l> :nohlsearch<cr>:diffupdate<cr>:syntax sync fromstart<cr>:silent! YcmForceCompileAndDiagnostics<cr><c-l>
+nnoremap <c-l> :nohlsearch<cr>:diffupdate<cr>:syntax sync fromstart<cr><c-l>
 
 " Ctrl+C yanks to system buffer
 nmap <c-c> "+y
@@ -75,8 +80,28 @@ nnoremap k gk
 nnoremap <silent> <c-_> :call nerdcommenter#Comment("n", "Toggle")<CR>
 vnoremap <silent> <c-_> :call nerdcommenter#Comment("v", "Toggle")<CR>
 
-" Smart rename on '<F2> new_name'
-nnoremap <F2> :YcmCompleter RefactorRename
+" Ctrl+Space forces completion
+inoremap <C-@> <Plug>(ale_complete)
+
+" Tab and Shift+Tab navigate completion menu
+inoremap <silent><expr> <TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
+inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+" Smart rename on <F2>
+nnoremap <F2> :ALERename
+
+" Ctrl+] - Go to defenition/declaration
+nnoremap <C-]> :up<CR>:ALEGoToDefinition<CR>
+nnoremap g<C-]> <C-]>
+" \i     - Show function description
+nmap <leader>h <Plug>(ale_hover)
+" \]     - List references (q to quit, Enter to goto)
+nnoremap <Leader>] :ALEFindReferences<CR>
+" \f     - Open FixIt
+nnoremap <leader>f :ALECodeAction<CR>
+" \e     - Open verbose error description
+nnoremap <leader>e :ALEDetail<CR>
+
 
 " Exec current file on <F9>
 nnoremap <F9>      :up<CR>:exe '!clear && ' . shellescape(expand("%:p"))<CR>
@@ -84,15 +109,6 @@ inoremap <F9> <Esc>:up<CR>:exe '!clear && ' . shellescape(expand("%:p"))<CR>
 
 " Copy buffer to clipboard on <F10>
 map <F10> <Esc>gg"+yG``
-
-" Ctrl+] - Go to defenition/declaration
-nnoremap <C-]> :up<CR>:YcmCompleter GoTo<CR>
-nnoremap g<C-]> <C-]>
-" \]     - List references, use with :cope, :cn, :cp
-nnoremap <Leader>] :YcmCompleter GoToReferences<CR>
-" \f     - Open FixIt
-nnoremap <leader>f :YcmCompleter FixIt<CR>
-
 
 " @s renames all occurences of word under cursor
 let @s="*N:%s///g\<left>\<left>"
@@ -188,7 +204,7 @@ augroup default_au
     autocmd FileType cpp call RemapF9()
     autocmd FileType vala call RemapF9()
     function RemapF9()
-        if filereadable('meson.build')
+        if filereadable(MesonProjectDir() . 'meson.build')
             nnoremap <F9>      :call MesonBuildAndRun()<CR>
             inoremap <F9> <Esc>:call MesonBuildAndRun()<CR>
         endif
@@ -231,36 +247,13 @@ let g:NERDDefaultAlign = 'left'         " Align line-wise comment delimiters flu
 let g:NERDCommentEmptyLines = 1         " Allow commenting and inverting empty lines (useful when commenting a region)
 let g:NERDTrimTrailingWhitespace = 1    " Enable trimming of trailing whitespace when uncommenting
 
-" YouCompleteMe
-let g:ycm_global_ycm_extra_conf = '~/.vim_ycm_extra_conf.py'
-let g:ycm_extra_conf_vim_data = ['MesonBuildDir(MesonProjectDir())']
-let g:ycm_autoclose_preview_window_after_insertion = 1
-let g:ycm_key_list_select_completion = ['<TAB>']
-let g:ycm_seed_identifiers_with_syntax = 1
-let g:ycm_error_symbol = '#'
-let g:ycm_warning_symbol = '#'
-let g:ycm_auto_hover = ''
-let g:ycm_key_detailed_diagnostics = '<leader>e'  " On line with an error, show full error
-" Show documentation for item under cursor on \i
-nmap <leader>i <plug>(YCMHover)
-" Trigger completion after typing three letters for these languages
-let g:ycm_semantic_triggers = {
-\    'perl6,python,cpp': ['re!\w{3}'],
-\}
-" Lsp config
-let g:ycm_language_server =
-  \ [
-  \   {
-  \     'name': 'vala',
-  \     'cmdline': [ 'vala-language-server' ],
-  \     'filetypes': [ 'vala', 'genie' ]
-  \   },
-  \   {
-  \     'name': 'zls',
-  \     'cmdline': [ 'zls' ],
-  \     'filetypes': [ 'zig' ]
-  \   }
-  \ ]
+" ALE
+set omnifunc=ale#completion#OmniFunc
+let g:ale_echo_msg_format = '%s'
+let g:ale_hover_cursor = 0
+let g:ale_hover_to_floating_preview = 1
+let g:ale_completion_enabled = 1    " Complete when typing
+let g:ale_set_balloons = 1          " Mouse over symbol shows info
 
 " Disable all default emmet mappings, map expand on Ctrl+V
 let g:user_emmet_install_global = 0
