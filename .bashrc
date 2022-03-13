@@ -1,9 +1,8 @@
 # .bashrc
 
 # If not running interactively or from vim, don't do anything
-# Set BASH_FROM_VIM in .vimrc
-[[ $- != *i* ]] && [[ -z "$BASH_FROM_VIM" ]] && return
-[[ -n "$BASH_FROM_VIM" ]] && shopt -s expand_aliases
+[[ $- != *i* ]] && [[ -z "$VIM" ]] && return
+[[ -n "$VIM" ]] && shopt -s expand_aliases
 
 # Config ───────────────────────────────────────────────────────────────────────
 
