@@ -151,7 +151,7 @@ let g:ale_completion_enabled = 1
 inoremap <C-@> <Plug>(ale_complete)
 
 " Smart rename on <F2>
-nnoremap <F2> :ALERename
+nnoremap <F2> :ALERename<CR>
 
 " Ctrl+] - Go to defenition
 nnoremap <expr>  <C-]> &ft == 'help' ?  '<C-]>' : ':up<CR>:ALEGoToDefinition<CR>'
