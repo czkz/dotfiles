@@ -27,18 +27,18 @@
     },
     "cpu": {
         "format": "{usage}% ",
-	"on-click": "alacritty --command htop -s PERCENT_CPU"
+        "on-click": "alacritty --command htop -s PERCENT_CPU"
     },
     "memory": {
         "format": "{}% ",
-	"on-click": "alacritty --command htop -s PERCENT_MEM"
+        "on-click": "alacritty --command htop -s PERCENT_MEM"
     },
     "battery": {
         "bat": "BAT0",
         "states": {
             // "good": 95,
-            "warning": 30,
-            "critical": 15
+            // "warning": 30,
+            // "critical": 15
         },
         "format": "{capacity}% {icon}",
         // "format-good": "", // An empty format will hide the module
