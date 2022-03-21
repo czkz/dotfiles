@@ -9,6 +9,7 @@
 PATH=$HOME/.bin:$PATH
 
 export VISUAL=vim
+export EDITOR=$VISUAL
 export MAKEFLAGS='-j4'
 
 # Don't save duplicates and commands that start with spaces
