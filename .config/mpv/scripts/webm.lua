@@ -25,7 +25,7 @@ local options = {
 	-- %R - "-(height)p", where height is the video's height, or scale_height, if it's enabled.
 	-- More specifiers are supported, see https://mpv.io/manual/master/#options-screenshot-template
 	-- Property expansion is supported (with %{} at top level, ${} when nested), see https://mpv.io/manual/master/#property-expansion
-	output_template = "%S-%E",
+	output_template = "%r",
 	-- Scale video to a certain height, keeping the aspect ratio. -1 disables it.
 	scale_height = -1,
 	-- Change the FPS of the output video, dropping or duplicating frames as needed.
@@ -47,10 +47,10 @@ local options = {
 	-- Sets the output format, from a few predefined ones.
 	-- Currently we have webm-vp8 (libvpx/libvorbis), webm-vp9 (libvpx-vp9/libopus)
 	-- and raw (rawvideo/pcm_s16le).
-	output_format = "webm-vp9",
+	output_format = "mp4",
 	twopass = false,
 	-- If set, applies the video filters currently used on the playback to the encode.
-	apply_current_filters = true,
+	apply_current_filters = false,
 	-- If set, writes the video's filename to the "Title" field on the metadata.
 	write_filename_on_metadata = false,
 	-- Set the number of encoding threads, for codecs libvpx and libvpx-vp9
@@ -58,7 +58,7 @@ local options = {
 	additional_flags = "",
 	-- Constant Rate Factor (CRF). The value meaning and limits may change,
 	-- from codec to codec. Set to -1 to disable.
-	crf = 10,
+	crf = 28,
 	-- Useful for flags that may impact output filesize, such as qmin, qmax etc
 	-- Won't be applied when strict_filesize_constraint is on.
 	non_strict_additional_flags = "",
@@ -150,6 +150,15 @@ file_exists = function(name)
   end
   return false
 end
+math.randomseed(os.time())
+local random_string
+random_string = function(length)
+    local ret = ""
+    for i = 1, length do
+        ret = ret .. string.upper(string.format("%d", math.random(10) - 1))
+    end
+    return ret
+end
 local expand_properties
 expand_properties = function(text, magic)
   if magic == nil then
@@ -237,6 +246,7 @@ format_filename = function(startTime, endTime, videoFormat)
     ["%%T"] = mp.get_property("media-title"),
     ["%%M"] = (mp.get_property_native('aid') and not mp.get_property_native('mute') and hasAudioCodec) and '-audio' or '',
     ["%%R"] = (options.scale_height ~= -1) and "-" .. tostring(options.scale_height) .. "p" or "-" .. tostring(mp.get_property_native('height')) .. "p",
+    ["%%r"] = random_string(16),
     ["%%t%%"] = "%%"
   }
   local filename = options.output_template
