@@ -5,7 +5,6 @@ base-system
 bash-completion
 curl
 dbus
-delta
 dumb_runtime_dir
 dust
 fd
@@ -21,6 +20,7 @@ htop
 lf
 mako
 mesa-dri
+mesa-vaapi
 mpv
 pipewire
 pulseaudio-utils
@@ -32,6 +32,7 @@ swaybg
 tealdeer
 telegram-desktop
 tmux
+unzip
 vim
 vsv
 wayfire
