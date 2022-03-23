@@ -16,7 +16,7 @@ export MAKEFLAGS='-j4'
 export HISTCONTROL=ignoreboth
 
 PS1_COMPACT="" # comment out to show "user@host"
-PS1="${PS1_COMPACT-\[\033[38;5;5m\]\u@\h }"'\[\033[38;5;6m\]\W\[$(tput sgr0)\]\[$(tput bold)\]\[\033[38;5;'"$([ $(whoami) = 'root' ] && echo 1 || echo 2)"'m\]\$\[$(tput sgr0)\] '
+PS1="${PS1_COMPACT-\[\033[38;5;5m\]\u@\h }"'\[\033[38;5;6m\]\w\[$(tput sgr0)\]\[$(tput bold)\]\[\033[38;5;'"$([ $(whoami) = 'root' ] && echo 1 || echo 2)"'m\]\$\[$(tput sgr0)\] '
 unset PS1_COMPACT
 
 # Aliases ──────────────────────────────────────────────────────────────────────
@@ -37,6 +37,7 @@ function mkcd() { mkdir "$1" && cd "$1"; }
 function cdtmp() { cd "$(mktemp -d)"; }
 function bulk() { while printf '> ' && read; do $@ $REPLY; done; echo; }
 
+# Void Linux package manager aliases
 if [ ! -x /usr/bin/xi ]; then
     alias xi='sudo xbps-install -S'
     alias xrs='xbps-query -Rs'
@@ -78,6 +79,7 @@ export LESS_TERMCAP_ue=$'\E[0m'        # reset underline
 
 # Integrations ─────────────────────────────────────────────────────────────────
 
+# Better Ctrl+R if fzf is installed
 if command -v fzf &> /dev/null
 then
     if [ -r /usr/share/fzf/completion.bash ]
@@ -90,12 +92,12 @@ then
         source /usr/share/doc/fzf/examples/completion.bash
         source /usr/share/doc/fzf/examples/key-bindings.bash
     fi
+    if type rg &> /dev/null; then
+        export FZF_DEFAULT_COMMAND='rg --files'
+    fi
 fi
 
-if type rg &> /dev/null; then
-    export FZF_DEFAULT_COMMAND='rg --files'
-fi
-
+# Bash-completion for xtools
 if [ -r /usr/share/bash-completion/completions/xbps ]
 then
     . <(sed -E -e '/^\s*(\S+)\)/{
