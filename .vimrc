@@ -69,7 +69,8 @@ nmap <c-c><c-c> ^"+y$
 map <F10> <Esc>gg"+yG``
 
 " Ctrl+S saves file
-nnoremap <c-s> :w<cr>
+nnoremap <c-s>      :w<cr>
+inoremap <c-s> <esc>:w<cr>
 
 " Ctrl+P opens fzf-vim file selector
 " g+Ctrl+P opens multifile search (ripgrep)
