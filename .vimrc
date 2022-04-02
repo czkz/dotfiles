@@ -16,6 +16,14 @@
 " - #!/usr/bin/env -S v run
 " - #!/usr/bin/env -S vala -g --pkg=gio-2.0 --pkg=gtk+-3.0 -X -rdynamic
 "
+" Completion:
+" Dumb completion is always available on Ctrl+N.
+" Smart completion needs appropriate tools installed,
+" like clangd for C/C++, tsserver for JavaScript, etc.
+" For a full list of supported tools see
+" https://github.com/dense-analysis/ale/blob/master/supported-tools.md
+" For a list of supported/active tools for current file see :ALEInfo
+"
 " C/C++ LSP:
 " Uses compile_commands.json or default settings
 " Generated automatically in meson projects
