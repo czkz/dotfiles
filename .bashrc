@@ -28,6 +28,8 @@ alias gs='git status'
 alias gl='git log'
 alias gd='git diff'
 
+
+[ "$XDG_CURRENT_DESKTOP" = "GNOME" ] && alias mpv='gnome-session-inhibit mpv'
 alias mpa='mpv --no-video --ytdl-format=bestaudio'
 function mpvs() { mpv "ytdl://ytsearch1:$*"; }
 function mpas() { mpa "ytdl://ytsearch1:$*"; }
