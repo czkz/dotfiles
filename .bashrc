@@ -15,7 +15,7 @@ export MAKEFLAGS='-j4'
 # Don't save duplicates and commands that start with spaces
 export HISTCONTROL=ignoreboth
 
-PS1_COMPACT="" # comment out to show "user@host"
+[ -z "$SSH_CONNECTION" ] && PS1_COMPACT="" # comment out to show "user@host"
 PS1="${PS1_COMPACT-\[\033[38;5;5m\]\u@\h }"'\[\033[38;5;6m\]\w\[$(tput sgr0)\]\[$(tput bold)\]\[\033[38;5;'"$([ $(whoami) = 'root' ] && echo 1 || echo 2)"'m\]\$\[$(tput sgr0)\] '
 unset PS1_COMPACT
 
