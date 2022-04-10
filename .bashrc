@@ -34,9 +34,12 @@ alias mpa='mpv --no-video --ytdl-format=bestaudio'
 function mpvs() { mpv "ytdl://ytsearch1:$*"; }
 function mpas() { mpa "ytdl://ytsearch1:$*"; }
 
+# sd DIR [CMD [ARGS]] - run CMD or bash with cwd=DIR
 function sd() { (cd "$1" && shift && "${@:-bash}") }
 function mkcd() { mkdir "$1" && cd "$1"; }
-function cdtmp() { cd "$(mktemp -d)"; }
+# like sd, but into a temp dir (removed afterwards)
+function cdtmp() { (d="$(mktemp -d)" && cd "$d" && { "${@:-bash}"; rm -rfv "$d"; } ) }
+# xargs with input from terminal
 function bulk() { while printf '> ' && read; do $@ $REPLY; done; echo; }
 
 # Void Linux package manager aliases
