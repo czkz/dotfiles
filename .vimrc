@@ -99,7 +99,7 @@ nnoremap <silent> <c-_> :call nerdcommenter#Comment("n", "Toggle")<CR>
 vnoremap <silent> <c-_> :call nerdcommenter#Comment("v", "Toggle")<CR>
 
 " @s renames all occurences of word under cursor
-let @s="*N:%s///g\<left>\<left>"
+let @s=":ZeroStar\<cr>:%s///g\<left>\<left>"
 " @b unfolds one line code block into 3 lines
 " cursor must be on the first bracket
 let @b="v%hols\<cr>\<c-r>\"\<esc>gv\<esc>"
@@ -124,6 +124,9 @@ nnoremap ZQ :q<CR>
 " 0 moves to first nonblank character in current line
 " faster to press than Shift+6
 nnoremap 0 ^
+
+" # highlights word under cursor
+nnoremap <silent> # :ZeroStar<CR>
 
 " Y yanks until end of line
 nnoremap Y y$
@@ -276,6 +279,7 @@ set wildmenu                   " Autocompletion menu for :commands
 set wildmode=list:longest,full " Autocompletion menu style
 set completeopt=menuone,popup  " Prettier code autocompletion
 set shortmess-=S               " Show search match index in statusline
+set foldnestmax=1              " No nested folds on zM
 
 " Fixes freezing when typing <Esc>O in insert mode
 set timeout timeoutlen=3000 ttimeoutlen=100
@@ -325,6 +329,9 @@ augroup vimrc
 
 augroup end
 
+
+" :ZeroStar highlights word under cursor, like *N
+command ZeroStar let @/ = '\<'.expand('<cword>').'\>' | set hls
 
 function SmartF9() abort
     if filereadable(MesonProjectDir() . 'meson.build') && stridx(expand('%:p:h') . '/', MesonProjectDir()) == 0
