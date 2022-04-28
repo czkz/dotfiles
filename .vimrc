@@ -74,10 +74,14 @@ inoremap <c-s> <esc>:w<cr>
 
 " Ctrl+P opens fzf-vim file selector
 " g+Ctrl+P opens multifile search (ripgrep)
+" Ctrl+H is a better git status
+" g+Ctrl+H is a better git log
+" Ctrl+Shift+/ opens multifile search for word under cursor
 nnoremap  <c-p> :up<cr>:Files<cr>
-nnoremap g<c-p> :up<cr>:Rg<cr>
+nnoremap g<c-p> :up<cr>:RG<cr>
 nnoremap  <c-h> :up<cr>:GFiles?<cr>
 nnoremap g<c-h> :up<cr>:BCommits<cr>
+nnoremap  <c-?> :up<cr>:exe 'Rg \b'.expand('<cword>').'\b'<cr>
 
 " Toggle line wrapping
 nnoremap <silent> <leader>w :set wrap!<CR>:set wrap?<CR>
@@ -226,6 +230,15 @@ endif
 " fzf-vim
 let g:fzf_layout = { 'window': { 'width': 1.0, 'height': 1.0 } }
 let g:fzf_preview_window = ['right:60%', 'ctrl-/']    " Hide preview window on Ctrl+/
+" See :h fzf-vim-example-advanced-ripgrep-integration
+function! RipgrepFzf(query, fullscreen)
+  let command_fmt = 'rg --column --line-number --no-heading --color=always --smart-case -- %s || true'
+  let initial_command = printf(command_fmt, shellescape(a:query))
+  let reload_command = printf(command_fmt, '{q}')
+  let spec = {'options': ['--phony', '--query', a:query, '--bind', 'change:reload:'.reload_command]}
+  call fzf#vim#grep(initial_command, 1, fzf#vim#with_preview(spec), a:fullscreen)
+endfunction
+command! -nargs=* -bang RG call RipgrepFzf(<q-args>, <bang>0)
 
 " delimitMate
 let delimitMate_expand_cr = 1           " Expand {<CR> into 3 lines
