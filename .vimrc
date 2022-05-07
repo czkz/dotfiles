@@ -11,7 +11,7 @@
 " Otherwise F9 will execute the current file,
 " so just chmod +x and add a shebang like
 " - #!/usr/bin/env python
-" - /*bin/true && exec tcc -run "$0";*/
+" - /*bin/true && exec tcc -run "$0" "$@";*/
 " - //bin/true && exec ./run.sh
 " - #!/usr/bin/env -S v run
 " - #!/usr/bin/env -S vala -g --pkg=gio-2.0 --pkg=gtk+-3.0 -X -rdynamic
