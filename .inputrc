@@ -4,3 +4,8 @@ set colored-stats on
 set completion-ignore-case on
 set match-hidden-files off
 set show-all-if-unmodified on
+"\C-xp": "PATH=${PATH}\e\C-e\C-a\ef\C-f"
+"\eh": backward-char
+"\ej": next-history
+"\ek": previous-history
+"\el": forward-char
