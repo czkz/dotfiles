@@ -7,13 +7,13 @@
 " Using Shift+K on plugin name (or anything else in this file) will likely show what it does
 "
 " F9 usage:
-" In meson projects it will just work.
-" Otherwise F9 will execute the current file,
-" so just chmod +x and add a shebang like
+" Executes current file if it is executable.
+" Otherwise detects meson and npm projects.
+" Can be overridden with :let f9='whoami'
+" For simple projects chmod +x and add a shebang like
 " - #!/usr/bin/env python
 " - /*bin/true && exec tcc -run "$0" "$@";*/
 " - //bin/true && exec ./run.sh
-" - #!/usr/bin/env -S v run
 " - #!/usr/bin/env -S vala -g --pkg=gio-2.0 --pkg=gtk+-3.0 -X -rdynamic
 "
 " Completion:
@@ -347,10 +347,18 @@ augroup end
 command ZeroStar let @/ = '\<'.expand('<cword>').'\>' | set hls
 
 function SmartF9() abort
-    if filereadable(MesonProjectDir() . 'meson.build') && stridx(expand('%:p:h') . '/', MesonProjectDir()) == 0
+    if exists('g:f9')
+        execute '!clear && ' . g:f9
+    elseif executable(expand('%:p'))
+        execute '!clear && ' . shellescape(expand('%:p'))
+    elseif filereadable(MesonProjectDir() . 'meson.build') && stridx(expand('%:p'), MesonProjectDir()) == 0
         return MesonBuildAndRun()
+    elseif filereadable(getcwd() . '/package.json') && stridx(expand('%:p'), getcwd() . '/') == 0
+        execute '!clear && npm start'
+    else " Offer to chmod +x
+        let l:cmd = 'chmod +x ' . shellescape(expand('%'))
+        execute '!clear && echo -n ' . l:cmd . '"? [Y/n] " && (read -n1 ans; [ "$?" = 0 -a "$ans" = "" ] && ans=y || echo; [ "$ans" = "y" ] && ' . l:cmd . ')'
     endif
-    execute '!clear && ' . shellescape(expand('%:p'))
 endfunction
 
 function MesonBuildAndRun() abort
