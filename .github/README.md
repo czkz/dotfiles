@@ -4,19 +4,26 @@ No installation scripts; just get all this to be in ~.
 See `Dotfiles management` in .bashrc on how
 to do it using a bare git repository.
 
-# What to have/expect
-- Linux
-- Bash
-  - Simple bashrc
+# What to expect
+- [vimrc](/.vimrc)
+  - Written from scratch
+  - Thoroughly documented
+  - Few breaking changes
+  - Simple installation (see [vimrc](/.vimrc))
+  - Linting + completion
+  - Build-and-Run key
+- [bashrc](/.bashrc)
   - Minimalistic PS1
   - Better Ctrl+R
   - Colors
-- Vim
-  - Thoroughly documented vimrc
-  - Few breaking changes
-  - Simple installation (see vimrc)
-  - Linting + completion
-  - Simple Build-and-Run key
+- [mpv.conf](/.config/mpv/mpv.conf)
+  - Configured to also work as an image viewer
+  - Battery saving mode (default)
+    - 6 times less CPU usage than default mpv / browser
+    -  Needs vaapi for hardware acceleration
+  - High quality "slow" profile (disabled by default)
+    - Mostly used to hide compression artifacts on 1080p youtube videos
+    - Additional sharpening on Ctrl+7 and Ctrl+0
 
 # Used on:
 - Void Linux + GNOME + X11/Wayland + Desktop/Laptop
