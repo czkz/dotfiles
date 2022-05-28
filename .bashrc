@@ -36,9 +36,13 @@ function mpas() { mpa "ytdl://ytsearch1:$*"; }
 
 # sd DIR [CMD [ARGS]] - run CMD or bash with cwd=DIR
 function sd() { (cd "$1" && shift && "${@:-bash}") }
-function mkcd() { mkdir "$1" && cd "$1"; }
+
 # like sd, but into a temp dir (removed afterwards)
-function cdtmp() { (d="$(mktemp -d)" && cd "$d" && { "${@:-bash}"; rm -rfv "$d"; } ) }
+function sdtmp() { (d="$(mktemp -d)" && cd "$d" && { "${@:-bash}"; rm -rfv "$d"; } ) }
+
+# `mkdir && cd` or `sdtmp`
+function mkcd() { [ "$#" = 0 ] && sdtmp || mkdir "$1" && cd "$1"; }
+
 # xargs with input from terminal
 function bulk() { while printf '> ' && read; do $@ $REPLY; done; echo; }
 

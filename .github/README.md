@@ -20,7 +20,7 @@ to do it using a bare git repository.
   - Configured to also work as an image viewer
   - Battery saving mode (default)
     - 6 times less CPU usage than default mpv / browser
-    -  Needs vaapi for hardware acceleration
+    - Needs vaapi for hardware acceleration
   - High quality "slow" profile (disabled by default)
     - Mostly used to hide compression artifacts on 1080p youtube videos
     - Additional sharpening on Ctrl+7 and Ctrl+0
