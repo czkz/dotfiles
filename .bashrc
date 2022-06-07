@@ -60,8 +60,10 @@ function xilogm() { xbps-query -p install-date -s '' | grep -Fwf <(xbps-query -m
 
 # See https://wiki.archlinux.org/title/Dotfiles#Tracking_dotfiles_directly_with_Git
 alias config='git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
-source /usr/share/bash-completion/completions/git
-__git_complete config __git_main
+if [ -r /usr/share/bash-completion/completions/git ]; then
+    source /usr/share/bash-completion/completions/git
+    __git_complete config __git_main
+fi
 
 # Cloning:
 # git clone --bare <git-repo-url> $HOME/.dotfiles
