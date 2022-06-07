@@ -303,6 +303,9 @@ if $TERM == 'alacritty' | set ttymouse=sgr | endif
 " HTML tag support for % (":h matchit" if enabled)
 packadd! matchit
 
+" Awesome GDB integration
+packadd! termdebug
+
 " Load bash aliases, check in .bashrc for $VIM
 let $BASH_ENV = "~/.bashrc"
 
