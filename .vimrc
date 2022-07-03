@@ -292,7 +292,6 @@ set wildmenu                   " Autocompletion menu for :commands
 set wildmode=list:longest,full " Autocompletion menu style
 set completeopt=menuone,popup  " Prettier code autocompletion
 set shortmess-=S               " Show search match index in statusline
-set foldnestmax=1              " No nested folds on zM
 
 " Fixes freezing when typing <Esc>O in insert mode
 set timeout timeoutlen=3000 ttimeoutlen=100
