@@ -47,8 +47,9 @@ function mkcd() { [ "$#" = 0 ] && sdtmp || mkdir "$1" && cd "$1"; }
 function bulk() { while printf '> ' && read; do $@ $REPLY; done; echo; }
 
 # Void Linux package manager aliases
-if [ ! -x /usr/bin/xi ]; then
-    alias xi='sudo xbps-install -S'
+# if [ ! -x /usr/bin/xi ]; then
+if true; then
+    alias xi='sudo xbps-install'
     alias xrs='xbps-query -Rs'
     alias xls='xbps-query -Rf'
     alias xq='xbps-query -R'
