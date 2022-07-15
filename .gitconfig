@@ -6,6 +6,6 @@
 [init]
 	defaultBranch = master
 [format]
-	pretty = format:%Cred%h %Cgreen(%cr)%<|(26)%Creset %<(30,trunc)%s %C(yellow)%d%Creset
+	pretty = format:%Cred%h %Cgreen(%ar)%<|(26)%Creset %<(30,trunc)%s %C(yellow)%d%Creset
 [core]
 	excludesFile = ~/.gitignore
