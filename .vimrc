@@ -44,6 +44,8 @@ Plug 'junegunn/vim-easy-align'
 Plug 'jasonccox/vim-wayland-clipboard'
 " LSP client
 Plug 'dense-analysis/ale'
+Plug 'prabirshrestha/vim-lsp'
+Plug 'rhysd/vim-lsp-ale'
 " HTML
 Plug 'AndrewRadev/tagalong.vim'
 Plug 'mattn/emmet-vim'
@@ -258,6 +260,15 @@ let g:ale_hover_cursor = 0                       " Disable cursor hover msg
 let g:ale_hover_to_floating_preview = 1          " Enable floating windows
 let g:ale_set_balloons = 1                       " Mouse over symbol shows info
 let g:ale_cpp_cc_options = '-std=c++20 -Wall'    " Fallback C++ options
+
+" vim-lsp
+if executable('vala-language-server')
+    au User lsp_setup call lsp#register_server({
+      \ 'name': 'vala-language-server',
+      \ 'cmd': {server_info->[&shell, &shellcmdflag, 'vala-language-server']},
+      \ 'whitelist': ['vala', 'genie'],
+      \ })
+endif
 
 " emmet
 let g:user_emmet_install_global = 0    " Disable default emmet mappings
