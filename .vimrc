@@ -108,7 +108,7 @@ vnoremap <silent> <c-_> :call nerdcommenter#Comment("v", "Toggle")<CR>
 let @s=":ZeroStar\<cr>:%s///g\<left>\<left>"
 " @b unfolds one line code block into 3 lines
 " cursor must be on the first bracket
-let @b="v%hols\<cr>\<c-r>\"\<esc>gv\<esc>"
+let @b="cs{}v%hols\<cr>\<c-r>\"\<esc>gv\<esc>"
 
 " Execute current file on <F9>
 " or build and run a meson project
