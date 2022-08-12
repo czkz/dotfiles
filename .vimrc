@@ -46,6 +46,7 @@ Plug 'jasonccox/vim-wayland-clipboard'
 Plug 'dense-analysis/ale'
 Plug 'prabirshrestha/vim-lsp'
 Plug 'rhysd/vim-lsp-ale'
+Plug 'tpope/vim-fireplace'
 " HTML
 Plug 'AndrewRadev/tagalong.vim'
 Plug 'mattn/emmet-vim'
