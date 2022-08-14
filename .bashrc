@@ -11,6 +11,7 @@ PATH=$HOME/.bin:$PATH
 export VISUAL=vim
 export EDITOR=$VISUAL
 export MAKEFLAGS='-j4'
+export XDG_CONFIG_HOME="$HOME/.config"
 
 # Don't save duplicates and commands that start with spaces
 export HISTCONTROL=ignoreboth
