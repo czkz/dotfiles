@@ -22,6 +22,10 @@ unset PS1_COMPACT
 
 # Aliases ──────────────────────────────────────────────────────────────────────
 
+alias vim=nvim
+
+alias ..='cd ..'
+
 alias vimrc='vim ~/.vimrc'
 alias bashrc='vim ~/.bashrc'
 
@@ -29,8 +33,11 @@ alias gs='git status'
 alias gl='git log'
 alias gd='git diff'
 
+alias webcam-on='sudo modprobe uvcvideo'
+alias webcam-off='sudo rmmod uvcvideo'
+alias nosuspend='gnome-session-inhibit --inhibit-only'
 
-[ "$XDG_CURRENT_DESKTOP" = "GNOME" ] && alias mpv='gnome-session-inhibit mpv'
+# [ "$XDG_CURRENT_DESKTOP" = "GNOME" ] && alias mpv='gnome-session-inhibit mpv'
 alias mpa='mpv --no-video --ytdl-format=bestaudio'
 function mpvs() { mpv "ytdl://ytsearch1:$*"; }
 function mpas() { mpa "ytdl://ytsearch1:$*"; }

@@ -1,2 +1,4 @@
 .*.swp
 .gdb_history
+.nrepl-port
+.cache/

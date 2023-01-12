@@ -47,6 +47,7 @@ Plug 'dense-analysis/ale'
 Plug 'prabirshrestha/vim-lsp'
 Plug 'rhysd/vim-lsp-ale'
 Plug 'tpope/vim-fireplace'
+Plug 'czkz/vim-parinfer'
 " HTML
 Plug 'AndrewRadev/tagalong.vim'
 Plug 'mattn/emmet-vim'
@@ -59,6 +60,8 @@ call plug#end()
 
 
 " Mappings ─────────────────────────────────────────────────────────────────────
+
+let g:mapleader = ' '
 
 " Ctrl+L disables search highlighting
 nnoremap <c-l> :nohlsearch<cr>:diffupdate<cr>:syntax sync fromstart<cr><c-l>
@@ -115,6 +118,9 @@ let @b="cs{}v%hols\<cr>\<c-r>\"\<esc>gv\<esc>"
 " or build and run a meson project
 nnoremap <F9>      :up<CR>:call SmartF9()<CR>
 inoremap <F9> <Esc>:up<CR>:call SmartF9()<CR>
+
+" <F9> for laptops
+nnoremap <cr>      :up<CR>:call SmartF9()<CR>
 
 " Start interactive EasyAlign in visual mode (e.g. vipga)
 xmap ga <Plug>(EasyAlign)*
@@ -353,6 +359,8 @@ augroup vimrc
 
     " Proper vfmt integration
     autocmd FileType vlang nnoremap <buffer> = :call _VFormatFile_patched()<CR>
+
+    autocmd FileType clojure let b:delimitMate_quotes = "\""
 
 augroup end
 

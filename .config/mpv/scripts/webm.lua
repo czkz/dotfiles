@@ -27,7 +27,7 @@ local options = {
 	-- Property expansion is supported (with %{} at top level, ${} when nested), see https://mpv.io/manual/master/#property-expansion
 	output_template = "%r",
 	-- Scale video to a certain height, keeping the aspect ratio. -1 disables it.
-	scale_height = -1,
+	scale_height = 480,
 	-- Change the FPS of the output video, dropping or duplicating frames as needed.
 	-- -1 means the FPS will be unchanged from the source.
 	fps = -1,
