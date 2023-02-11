@@ -120,7 +120,7 @@ then
 fi
 
 # Bash-completion for xtools
-if [ -r /usr/share/bash-completion/completions/xbps ]
+if [ -r /usr/share/bash-completion/completions/xbps ] && xbps-query bash-completion > /dev/null
 then
     . <(sed -E -e '/^\s*(\S+)\)/{
         s/xbps-install/\0 | xi/;
