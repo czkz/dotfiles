@@ -32,6 +32,7 @@ alias bashrc='vim ~/.bashrc'
 alias gs='git status'
 alias gl='git log'
 alias gd='git diff'
+gss() { data=$(git -c color.status=always status --short) && echo "$data" | fzf --ansi --multi --nth 2..,.. --tiebreak=index --preview 'git diff --color=always -- {-1} | sed 1,4d' --preview-window right:70% --bind ctrl-/:toggle-preview; }
 
 alias webcam-on='sudo modprobe uvcvideo'
 alias webcam-off='sudo rmmod uvcvideo'
