@@ -18,7 +18,7 @@ export HISTCONTROL=ignoreboth
 export HISTSIZE=10000
 
 [ -z "$SSH_CONNECTION" ] && PS1_COMPACT="" # comment out to show "user@host"
-PS1="${PS1_COMPACT-\[\e[35m\]\u@\h }\[\e[36m\]\w\[\e[1;$([ $UID = root ] && echo 31 || echo 32)m\]\\$\[\e[0m\] "
+PS1="${PS1_COMPACT-\[\e[35m\]\u@\h }\[\e[36m\]\w\[\e[1;$([ $UID = 0 ] && echo 31 || echo 32)m\]\\$\[\e[0m\] "
 unset PS1_COMPACT
 
 # Aliases ──────────────────────────────────────────────────────────────────────
