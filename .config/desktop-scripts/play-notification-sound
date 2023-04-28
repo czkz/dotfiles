@@ -1,0 +1,2 @@
+#!/bin/sh
+exec canberra-gtk-play -i message

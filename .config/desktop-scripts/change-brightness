@@ -1,0 +1,6 @@
+#!/bin/sh
+[ "$1" = "up" ] && F=-A
+[ "$1" = "down" ] && F=-U
+light $F 5
+V=$(light | sed 's/\.[0-9][0-9]$//')
+notify-send "Backlight: $V%" -h "int:value:$V" -h "string:synchronous:backlight"

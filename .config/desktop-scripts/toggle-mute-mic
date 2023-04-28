@@ -1,0 +1,7 @@
+#!/bin/sh
+wpctl set-mute @DEFAULT_AUDIO_SOURCE@ toggle
+if wpctl get-volume @DEFAULT_AUDIO_SOURCE@ | grep -F '[MUTED]'; then
+    notify-send -u low -h "string:synchronous:mic-mute" "Mic muted"
+else
+    notify-send -u low -h "string:synchronous:mic-mute" "Mic unmuted"
+fi
