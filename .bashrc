@@ -38,6 +38,8 @@ gss() { data=$(git -c color.status=always status --short) && echo "$data" | fzf 
 alias webcam-on='sudo modprobe uvcvideo'
 alias webcam-off='sudo rmmod uvcvideo'
 alias nosuspend='gnome-session-inhibit --inhibit-only'
+alias ocr='tesseract-ocr -l eng+rus "$(fd . ~/Pictures/Screenshots/ -X ls -1t | head -n1)" stdout --psm 13 quiet'
+alias nau='gapplication launch org.gnome.Nautilus .'
 
 # [ "$XDG_CURRENT_DESKTOP" = "GNOME" ] && alias mpv='gnome-session-inhibit mpv'
 alias mpa='mpv --no-video --ytdl-format=bestaudio'
